@@ -1,0 +1,20 @@
+{
+  "name": "Laranuxt",
+  "version": "1.0.0",
+  "description": "Laranuxt",
+  "author": "GJLuCkY",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "nuxt": "^1.0.0",
+    "@nuxtjs/axios": "^5.0.0"
+  },
+  "devDependencies": {
+    "cross-env": "^5.0.1"
+  }
+}

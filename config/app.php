@@ -54,6 +54,12 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
+    'mode' => env('APP_MODE', 'development'),
+
+    'api_domain' => env('API_URL', 'http://api.laranuxt.develop'),
+
+    'admin_domain' => env('ADMIN_URL', 'http://admin.laranuxt.develop'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone
@@ -65,7 +71,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Almaty',
 
     /*
     |--------------------------------------------------------------------------
@@ -78,7 +84,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'ru',
 
     /*
     |--------------------------------------------------------------------------
