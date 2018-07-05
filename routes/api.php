@@ -16,3 +16,5 @@ use Illuminate\Http\Request;
 Route::get('/', function () {
     return ['hello from api'];
 });
+
+Route::get('/products', 'ProductAPIController@index');

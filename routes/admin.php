@@ -19,3 +19,10 @@ Route::post('password/email', '\Backpack\Base\app\Http\Controllers\Auth\ForgotPa
 
 Route::get('dashboard', '\Backpack\Base\app\Http\Controllers\AdminController@dashboard');
 Route::get('/', '\Backpack\Base\app\Http\Controllers\AdminController@redirect');
+
+Route::group(['prefix' => config('backpack.base.route_prefix'), 'middleware' => ['admin']], function()
+{
+CRUD::resource('product', 'ProductCrudController');
+   
+
+});
