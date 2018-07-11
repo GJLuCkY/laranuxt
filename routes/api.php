@@ -17,4 +17,8 @@ Route::get('/', function () {
     return ['hello from api'];
 });
 
-Route::get('/products', 'ProductAPIController@index');
+
+
+Route::get('/catalog/{category}', 'CategoryAPIController@getCategoryProducts');
+Route::get('/catalog/{category}/{product}', 'ProductAPIController@getProduct');
+Route::get('/catalog', 'CategoryAPIController@getCategories');

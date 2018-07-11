@@ -4,3 +4,4 @@
 <li><a href='{{ url(config('backpack.base.route_prefix', 'admin') . '/setting') }}'><i class='fa fa-cog'></i> <span>Settings</span></a></li>
 <li><a href="{{backpack_url('page') }}"><i class="fa fa-file-o"></i> <span>Pages</span></a></li>
 <li><a href="{{backpack_url('product') }}"><i class="fa fa-file-o"></i> <span>Продукты</span></a></li>
+<li><a href="{{backpack_url('category') }}"><i class="fa fa-file-o"></i> <span>Категории</span></a></li>

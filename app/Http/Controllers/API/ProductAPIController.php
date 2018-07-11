@@ -16,7 +16,7 @@ class ProductAPIController extends Controller
      */
     public function index(Request $request)
     {
-        $products = Product::paginate(16);
+        $products = Product::with('category')->paginate(16);
 
         if($request->has('search') && !empty($request->get('search')))  {
             $products = Product::search($request->get('search'))->paginate(16);
@@ -25,6 +25,29 @@ class ProductAPIController extends Controller
         }
 
         return ProductResource::collection($products);
+    }
+
+    public function getProduct($catSlug, $productSlug)
+    {
+        $product = Product::where('slug', $productSlug)
+                    ->whereHas('category', function ($q) use ($catSlug) {
+                        $q->where('slug', $catSlug);
+                        // $q->orWhereHas('parent', function ($q2) use ($catSlug) {
+                        //     $q2->where('slug', $catSlug);
+                        // });
+                    })    
+                    ->first();
+
+        if(is_null($product)) {
+            return response()->json([
+                'message'   =>  'Product not found!'
+            ], 404);
+        }
+
+        return response()->json([
+            'data' => new ProductResource($product),
+            'message'   =>  'Product successfully retrieved!'
+        ]);
     }
     
 }

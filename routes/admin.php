@@ -23,6 +23,6 @@ Route::get('/', '\Backpack\Base\app\Http\Controllers\AdminController@redirect');
 Route::group(['prefix' => config('backpack.base.route_prefix'), 'middleware' => ['admin']], function()
 {
 CRUD::resource('product', 'ProductCrudController');
-   
+CRUD::resource('category', 'CategoryCrudController');
 
 });

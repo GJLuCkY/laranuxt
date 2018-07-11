@@ -21,6 +21,7 @@ class ProductResource extends JsonResource
             'title'                  =>  $this->title,
             //'url'                   =>  $this->getUrl(),
             'slug'                  =>  $this->slug,
+            'category_id'           =>  $this->category_id,
             //'catSlug'               =>  $this->category->slug,
             //'status'                =>  $this->status == 1 ? 'В наличии' : 'Нет в наличии',
             //'excerpt'               =>  $this->withFakes()->excerpt,
@@ -30,7 +31,7 @@ class ProductResource extends JsonResource
             // 'consumer_properties'   =>  $this->when($this->requestHasAttribute($request->get('with'), 'consumer_properties'), $this->withFakes()->consumer_properties),
             // 'recommendations'       =>  $this->when($this->requestHasAttribute($request->get('with'), 'recommendations'), $this->withFakes()->recommendations),
             'image'             =>  asset('/uploads/'.$this->image),
-            'content'           => $this->content
+            'content'           =>  $this->content
         ];
     }
 
