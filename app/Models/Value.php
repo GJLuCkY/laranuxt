@@ -3,10 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Cviebrock\EloquentSluggable\Sluggable;
 use Backpack\CRUD\CrudTrait;
+use Cviebrock\EloquentSluggable\Sluggable;
 
-class Product extends Model
+class Value extends Model
 {
     use CrudTrait;
     use Sluggable;
@@ -17,11 +17,11 @@ class Product extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'products';
+    protected $table = 'values';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ['title', 'slug', 'image', 'content'];
+    protected $fillable = ['title', 'slug', 'image'];
     // protected $hidden = [];
     // protected $dates = [];
 
@@ -30,6 +30,7 @@ class Product extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+
     public static function boot()
     {
         parent::boot();
@@ -52,14 +53,15 @@ class Product extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-    public function category()
+
+    public function filters()
     {
-        return $this->belongsTo('App\Models\Category', 'category_id');
+        return $this->belongsToMany('App\Models\Filter');
     }
 
-    public function values()
+    public function products()
     {
-        return $this->belongsToMany('App\Models\Value');
+        return $this->belongsToMany('App\Models\Product');
     }
 
     /*
@@ -73,6 +75,7 @@ class Product extends Model
     | ACCESORS
     |--------------------------------------------------------------------------
     */
+
     // The slug is created automatically from the "name" field if no slug exists.
     public function getSlugOrTitleAttribute()
     {
@@ -88,11 +91,12 @@ class Product extends Model
     | MUTATORS
     |--------------------------------------------------------------------------
     */
+
     public function setImageAttribute($value)
     {
         $attribute_name = "image";
         $disk = "uploads";
-        $destination_path = "product";
+        $destination_path = "values";
 
         // if the image was erased
         if ($value==null) {

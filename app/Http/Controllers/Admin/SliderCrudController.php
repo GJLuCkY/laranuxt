@@ -5,15 +5,15 @@ namespace App\Http\Controllers\Admin;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
-use App\Http\Requests\ProductRequest as StoreRequest;
-use App\Http\Requests\ProductRequest as UpdateRequest;
+use App\Http\Requests\SliderRequest as StoreRequest;
+use App\Http\Requests\SliderRequest as UpdateRequest;
 
 /**
- * Class ProductCrudController
+ * Class SliderCrudController
  * @package App\Http\Controllers\Admin
  * @property-read CrudPanel $crud
  */
-class ProductCrudController extends CrudController
+class SliderCrudController extends CrudController
 {
     public function setup()
     {
@@ -23,9 +23,9 @@ class ProductCrudController extends CrudController
         | BASIC CRUD INFORMATION
         |--------------------------------------------------------------------------
         */
-        $this->crud->setModel('App\Models\Product');
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/product');
-        $this->crud->setEntityNameStrings('product', 'products');
+        $this->crud->setModel('App\Models\Slider');
+        $this->crud->setRoute(config('backpack.base.route_prefix') . '/slider');
+        $this->crud->setEntityNameStrings('slider', 'sliders');
 
         /*
         |--------------------------------------------------------------------------
@@ -35,18 +35,25 @@ class ProductCrudController extends CrudController
 
         $this->crud->addColumn([
             'name' => 'title',
-            'label' => 'Продукты'
+            'label' => 'Слайдеры'
+        ]);
+        $this->crud->addColumn([
+            'name' => 'image',
+            'label' => 'Изображения',
+            'type' => 'image',
+            'prefix' => 'uploads/',
+            'width' => '300px',
+            'height' => '100%'
         ]);
 
         $this->crud->addField([
             'name' => 'title',
-            'label' => 'Название продукта'
+            'label' => 'Название слайдера'
         ]);
         $this->crud->addField([
-            'name' => 'slug',
-            'label' => 'URI - страницы (Генерируется автоматически)'
+            'name' => 'description',
+            'label' => 'Описание слайдера'
         ]);
-
         $this->crud->addField([ // image
             'label' => "Изображение",
             'name' => "image",
@@ -58,27 +65,9 @@ class ProductCrudController extends CrudController
             'prefix' => 'uploads/' // in case you only store the filename in the database, this text will be prepended to the database value
         ]);
         $this->crud->addField([
-            'name' => 'content',
-            'label' => 'Описание',
-            'type' => 'summernote'
-        ]);
-        $this->crud->addField([
-            'label' => "Выберите категорию",
-            'type' => 'select',
-            'name' => 'category_id', // the db column for the foreign key
-            'entity' => 'category', // the method that defines the relationship in your Model
-            'attribute' => 'title', // foreign key attribute that is shown to user
-            'model' => "App\Models\Category", // foreign key model
-        ]);
-
-        $this->crud->addField([
-            'label' => "Выберите фильтры",
-            'type' => 'select2_multiple',
-            'name' => 'values', // the method that defines the relationship in your Model
-            'entity' => 'values', // the method that defines the relationship in your Model
-            'attribute' => 'title', // foreign key attribute that is shown to user
-            'model' => "App\Models\Value", // foreign key model
-            'pivot' => true, // on create&update, do you need to add/delete pivot table entries?
+            'name' => 'active',
+            'label' => 'Опубликовать',
+            'type' => 'checkbox'
         ]);
 
         // ------ CRUD FIELDS

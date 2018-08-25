@@ -3,13 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Cviebrock\EloquentSluggable\Sluggable;
 use Backpack\CRUD\CrudTrait;
 
-class Product extends Model
+class Slider extends Model
 {
     use CrudTrait;
-    use Sluggable;
 
     /*
     |--------------------------------------------------------------------------
@@ -17,11 +15,11 @@ class Product extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'products';
+    protected $table = 'sliders';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ['title', 'slug', 'image', 'content'];
+    protected $fillable = ['title', 'description', 'image', 'active'];
     // protected $hidden = [];
     // protected $dates = [];
 
@@ -38,29 +36,11 @@ class Product extends Model
         });
     }
 
-    public function sluggable()
-    {
-        return [
-            'slug' => [
-                'source' => 'slug_or_title',
-            ],
-        ];
-    }
-
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-    public function category()
-    {
-        return $this->belongsTo('App\Models\Category', 'category_id');
-    }
-
-    public function values()
-    {
-        return $this->belongsToMany('App\Models\Value');
-    }
 
     /*
     |--------------------------------------------------------------------------
@@ -73,15 +53,7 @@ class Product extends Model
     | ACCESORS
     |--------------------------------------------------------------------------
     */
-    // The slug is created automatically from the "name" field if no slug exists.
-    public function getSlugOrTitleAttribute()
-    {
-        if ($this->slug != '') {
-            return $this->slug;
-        }
 
-        return $this->title;
-    }
 
     /*
     |--------------------------------------------------------------------------
@@ -92,7 +64,7 @@ class Product extends Model
     {
         $attribute_name = "image";
         $disk = "uploads";
-        $destination_path = "product";
+        $destination_path = "slider";
 
         // if the image was erased
         if ($value==null) {

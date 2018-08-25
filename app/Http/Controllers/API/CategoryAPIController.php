@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Http\Resources\CategoryResource;
 use App\Http\Resources\ProductResource;
+use App\Http\Resources\FilterResource;
 
 class CategoryAPIController extends Controller
 {
@@ -57,9 +58,9 @@ class CategoryAPIController extends Controller
         }
         
         if($request->has('search') && !empty($request->get('search')))  {
-            $products = $category->products()->search($request->get('search'))->paginate(16);
+            $products = $category->products()->search($request->get('search'))->paginate(1);
         } else {
-            $products = $category->products()->paginate(16);
+            $products = $category->products()->paginate(1);
         }
 
         return ProductResource::collection($products)
@@ -67,7 +68,7 @@ class CategoryAPIController extends Controller
                     'message'   =>  'Category (' .$category->name.') products successfully retrieved!',
                     'meta'      =>  [
                         'category'  =>  new CategoryResource($category)
-                    ]
+                    ],
                 ]);
     }
 

@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CategoryResource extends JsonResource
+class ValueResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,9 +16,11 @@ class CategoryResource extends JsonResource
     {
         // dd($this->filters);
         return [
-            'title'      =>  $this->title,
-            'products'  => $this->when($this->includeHasAttribute($request->get('include'), 'products'), ProductResource::collection($this->products()->paginate(9))),
-            'slug'      =>  $this->slug
+            'title'                    =>  $this->title,
+            //'title'                  =>  $this->title,
+            //'url'                   =>  $this->getUrl(),
+            'slug'                  =>  $this->slug,
+            
         ];
     }
 

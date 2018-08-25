@@ -24,5 +24,8 @@ Route::group(['prefix' => config('backpack.base.route_prefix'), 'middleware' => 
 {
 CRUD::resource('product', 'ProductCrudController');
 CRUD::resource('category', 'CategoryCrudController');
+CRUD::resource('slider', 'SliderCrudController');
+CRUD::resource('filter', 'FilterCrudController');
+CRUD::resource('value', 'ValueCrudController');
 
 });

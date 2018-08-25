@@ -5,27 +5,26 @@ namespace App\Http\Controllers\Admin;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
-use App\Http\Requests\ProductRequest as StoreRequest;
-use App\Http\Requests\ProductRequest as UpdateRequest;
+use App\Http\Requests\FilterRequest as StoreRequest;
+use App\Http\Requests\FilterRequest as UpdateRequest;
 
 /**
- * Class ProductCrudController
+ * Class FilterCrudController
  * @package App\Http\Controllers\Admin
  * @property-read CrudPanel $crud
  */
-class ProductCrudController extends CrudController
+class FilterCrudController extends CrudController
 {
     public function setup()
     {
-
         /*
         |--------------------------------------------------------------------------
         | BASIC CRUD INFORMATION
         |--------------------------------------------------------------------------
         */
-        $this->crud->setModel('App\Models\Product');
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/product');
-        $this->crud->setEntityNameStrings('product', 'products');
+        $this->crud->setModel('App\Models\Filter');
+        $this->crud->setRoute(config('backpack.base.route_prefix') . '/filter');
+        $this->crud->setEntityNameStrings('filter', 'filters');
 
         /*
         |--------------------------------------------------------------------------
@@ -35,57 +34,34 @@ class ProductCrudController extends CrudController
 
         $this->crud->addColumn([
             'name' => 'title',
-            'label' => 'Продукты'
+            'label' => 'Фильтры'
         ]);
 
         $this->crud->addField([
             'name' => 'title',
-            'label' => 'Название продукта'
-        ]);
-        $this->crud->addField([
-            'name' => 'slug',
-            'label' => 'URI - страницы (Генерируется автоматически)'
+            'label' => 'Название фильтра'
         ]);
 
-        $this->crud->addField([ // image
-            'label' => "Изображение",
-            'name' => "image",
-            'type' => 'image',
-            'upload' => true,
-            'crop' => true, // set to true to allow cropping, false to disable
-            //'aspect_ratio' => 1, // ommit or set to 0 to allow any aspect ratio
-            // 'disk' => 's3_bucket', // in case you need to show images from a different disk
-            'prefix' => 'uploads/' // in case you only store the filename in the database, this text will be prepended to the database value
-        ]);
         $this->crud->addField([
-            'name' => 'content',
-            'label' => 'Описание',
-            'type' => 'summernote'
+            'name' => 'slug',
+            'label' => 'URI - фильтра (Генерируется автоматически)'
         ]);
+
         $this->crud->addField([
-            'label' => "Выберите категорию",
+            'label' => "Фильтр относящийся к категории",
             'type' => 'select',
             'name' => 'category_id', // the db column for the foreign key
             'entity' => 'category', // the method that defines the relationship in your Model
             'attribute' => 'title', // foreign key attribute that is shown to user
-            'model' => "App\Models\Category", // foreign key model
+            'model' => "App\Models\Category",
         ]);
 
         $this->crud->addField([
-            'label' => "Выберите фильтры",
-            'type' => 'select2_multiple',
-            'name' => 'values', // the method that defines the relationship in your Model
-            'entity' => 'values', // the method that defines the relationship in your Model
-            'attribute' => 'title', // foreign key attribute that is shown to user
-            'model' => "App\Models\Value", // foreign key model
-            'pivot' => true, // on create&update, do you need to add/delete pivot table entries?
+            'name' => 'status',
+            'label' => 'Опубликовать в категории',
+            'type' => 'checkbox'
         ]);
 
-        // ------ CRUD FIELDS
-        // $this->crud->addField($options, 'update/create/both');
-        // $this->crud->addFields($array_of_arrays, 'update/create/both');
-        // $this->crud->removeField('name', 'update/create/both');
-        // $this->crud->removeFields($array_of_names, 'update/create/both');
 
         // ------ CRUD COLUMNS
         // $this->crud->addColumn(); // add a single column, at the end of the stack
@@ -94,6 +70,16 @@ class ProductCrudController extends CrudController
         // $this->crud->removeColumns(['column_name_1', 'column_name_2']); // remove an array of columns from the stack
         // $this->crud->setColumnDetails('column_name', ['attribute' => 'value']); // adjusts the properties of the passed in column (by name)
         // $this->crud->setColumnsDetails(['column_1', 'column_2'], ['attribute' => 'value']);
+
+        // ------ CRUD FIELDS
+        // $this->crud->addField($options, 'update/create/both');
+        // $this->crud->addFields($array_of_arrays, 'update/create/both');
+        // $this->crud->removeField('name', 'update/create/both');
+        // $this->crud->removeFields($array_of_names, 'update/create/both');
+
+        // add asterisk for fields that are required in FilterRequest
+        $this->crud->setRequiredFields(StoreRequest::class, 'create');
+        $this->crud->setRequiredFields(UpdateRequest::class, 'edit');
 
         // ------ CRUD BUTTONS
         // possible positions: 'beginning' and 'end'; defaults to 'beginning' for the 'line' stack, 'end' for the others;

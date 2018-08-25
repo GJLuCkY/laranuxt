@@ -20,5 +20,8 @@ Route::get('/', function () {
 
 
 Route::get('/catalog/{category}', 'CategoryAPIController@getCategoryProducts');
+Route::get('/filter/{category}', 'FilterAPIController@getCategoryFilters');
 Route::get('/catalog/{category}/{product}', 'ProductAPIController@getProduct');
 Route::get('/catalog', 'CategoryAPIController@getCategories');
+
+Route::get('/sliders', 'SliderAPIController@getSliders');

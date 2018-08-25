@@ -16,12 +16,12 @@ class ProductAPIController extends Controller
      */
     public function index(Request $request)
     {
-        $products = Product::with('category')->paginate(16);
+        $products = Product::with('category')->paginate(1);
 
         if($request->has('search') && !empty($request->get('search')))  {
-            $products = Product::search($request->get('search'))->paginate(16);
+            $products = Product::search($request->get('search'))->paginate(1);
         } else {
-            $products = Product::paginate(16);
+            $products = Product::paginate(1);
         }
 
         return ProductResource::collection($products);

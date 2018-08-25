@@ -14,7 +14,7 @@ module.exports = {
       { hid: 'description', name: 'description', content: pkg.description }
     ],
     script: [
-      { src: 'https://code.jquery.com/jquery-1.12.4.js' },
+      { src: '/jquery.min.js' },
       { src: '/jquery-ui.min.js' },
       { src: '/plugins.js' },
       { src: '/main.js' },

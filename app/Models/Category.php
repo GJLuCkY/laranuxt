@@ -48,6 +48,10 @@ class Category extends Model
         return $this->hasMany('App\Models\Product', 'category_id');
     }
 
+    public function filters() {
+        return $this->hasMany('App\Models\Filter', 'category_id');
+    }
+
     /*
     |--------------------------------------------------------------------------
     | SCOPES

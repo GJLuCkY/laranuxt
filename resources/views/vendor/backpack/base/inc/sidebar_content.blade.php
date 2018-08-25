@@ -5,3 +5,6 @@
 <li><a href="{{backpack_url('page') }}"><i class="fa fa-file-o"></i> <span>Pages</span></a></li>
 <li><a href="{{backpack_url('product') }}"><i class="fa fa-file-o"></i> <span>Продукты</span></a></li>
 <li><a href="{{backpack_url('category') }}"><i class="fa fa-file-o"></i> <span>Категории</span></a></li>
+<li><a href="{{backpack_url('slider') }}"><i class="fa fa-file-o"></i> <span>Слайдеры</span></a></li>
+<li><a href="{{backpack_url('filter') }}"><i class="fa fa-file-o"></i> <span>Фильтры</span></a></li>
+<li><a href="{{backpack_url('value') }}"><i class="fa fa-file-o"></i> <span>Значения фильтров</span></a></li>
